@@ -17,8 +17,19 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
-    { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+    -- MODIFICACIÓN AQUÍ: Añade la tabla 'opts' para especificar el colorscheme
+    {
+      "LazyVim/LazyVim",
+      import = "lazyvim.plugins",
+      opts = {
+        colorscheme = "tokyonight", -- O "tokyonight", o el nombre del tema que instalaste
+        -- Puedes añadir otras opciones de LazyVim aquí si las necesitas, por ejemplo:
+        -- auto_format = true,
+        -- ui = { theme = "auto" } -- si quieres que componentes UI como lualine sigan el tema
+      },
+    },
 
+    -- Tus extras de LazyVim (sin cambios)
     { import = "lazyvim.plugins.extras.lang.go" },
     { import = "lazyvim.plugins.extras.lang.rust" },
     { import = "lazyvim.plugins.extras.lang.python" },
@@ -27,31 +38,24 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" }, -- For JS, TS, JSX, TSX
     { import = "lazyvim.plugins.extras.lang.tailwind" }, -- For LSP de TailwindCSS
 
-    -- import/override with your plugins
+    -- import/override with your plugins (esto carga tu lua/plugins/theme.lua, lsp.lua, etc.)
     { import = "plugins" },
   },
   defaults = {
-    -- By default, only LazyVim plugins will be lazy-loaded. Your custom plugins will load during startup.
-    -- If you know what you're doing, you can set this to `true` to have all your custom plugins lazy-loaded by default.
     lazy = false,
-    -- It's recommended to leave version=false for now, since a lot the plugin that support versioning,
-    -- have outdated releases, which may break your Neovim install.
-    version = false, -- always use the latest git commit
-    -- version = "*", -- try installing the latest stable version for plugins that support semver
+    version = false,
   },
-  install = { colorscheme = { "tokyonight", "habamax" } },
+  -- La sección 'install' es principalmente para la configuración inicial.
+  -- La opción 'opts.colorscheme' en "LazyVim/LazyVim" es la que prevalece para el uso diario.
+  install = { colorscheme = { "tokyonight", "habamax", "catppuccin" } }, -- Puedes dejar esto o simplificarlo
   checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+    enabled = true,
+    notify = false,
+  },
   performance = {
     rtp = {
-      -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
