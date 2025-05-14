@@ -18,6 +18,15 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+
+    { import = "lazyvim.plugins.extras.lang.go" },
+    { import = "lazyvim.plugins.extras.lang.rust" },
+    { import = "lazyvim.plugins.extras.lang.python" },
+    { import = "lazyvim.plugins.extras.lang.docker" },
+    { import = "lazyvim.plugins.extras.lang.json" }, -- Useful for prettier, eslint which are used on the web
+    { import = "lazyvim.plugins.extras.lang.typescript" }, -- For JS, TS, JSX, TSX
+    { import = "lazyvim.plugins.extras.lang.tailwind" }, -- For LSP de TailwindCSS
+
     -- import/override with your plugins
     { import = "plugins" },
   },
