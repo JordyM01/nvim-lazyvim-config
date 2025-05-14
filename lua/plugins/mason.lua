@@ -23,7 +23,7 @@ return {
       "gopls", -- Go
       "rust-analyzer", -- Rust
       "pyright", -- Python (alternativa: ruff-lsp)
-      "dockerfile-language-server-nodejs", -- Docker (alternativa: dockerls)
+      "dockerfile-language-server", -- Docker (alternativa: dockerls)
       "css-lsp", -- CSS
       "html-lsp", -- HTML
       "typescript-language-server", -- TypeScript/JavaScript (alternativa: tsserver)
