@@ -1,0 +1,11 @@
+We installed Lazy Vim from its official repository. We used the default Lazy Vim configuration. To add configurations, it's important to follow the official documentation and add code to the .config/nvim/lua/config/options.lua file as directed.
+
+An essential part is to activate Lazy Vim extras with the :LazyExtras command and install the necessary plugins.
+
+For example, for the Rust plugin, opening a Rust file and running :LazyExtras makes installing plugins easier, as Lazy Vim itself recommends the appropriate plugins.
+
+For the theme, we created a ~/.config/nvim/lua/plugins/colorscheme.lua file. This file contains all the information needed to download and apply themes.
+
+The ~/.config/nvim/lua/plugins/noice.lua file disables the noice plugin, which is responsible for displaying a floating message with the command when entering execution mode. When disabled, it will appear on a line at the bottom of the console, just like in vim.
+
+
