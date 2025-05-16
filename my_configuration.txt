@@ -8,4 +8,6 @@ For the theme, we created a ~/.config/nvim/lua/plugins/colorscheme.lua file. Thi
 
 The ~/.config/nvim/lua/plugins/noice.lua file disables the noice plugin, which is responsible for displaying a floating message with the command when entering execution mode. When disabled, it will appear on a line at the bottom of the console, just like in vim.
 
+The ~/.config/nvim/lua/plugins/snack-explorer.lua file adds the configuration to show hidden folders and files.
 
+The ~/.config/nvim/lua/plugins/go-lang.lua file contains the configuration for working with Go. This configuration was extracted from the official repository. This file can be viewed and/or downloaded at the following link: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/lang/go.lua. It is important to mention that there are more configuration files. The configuration in those files is the same as documented and is the default configuration for Lazy Vim's extras plugins (reference to the :LazyExtras command).
