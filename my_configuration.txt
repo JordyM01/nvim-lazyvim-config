@@ -11,3 +11,13 @@ The ~/.config/nvim/lua/plugins/noice.lua file disables the noice plugin, which i
 The ~/.config/nvim/lua/plugins/snack-explorer.lua file adds the configuration to show hidden folders and files.
 
 The ~/.config/nvim/lua/plugins/go-lang.lua file contains the configuration for working with Go. This configuration was extracted from the official repository. This file can be viewed and/or downloaded at the following link: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/extras/lang/go.lua. It is important to mention that there are more configuration files. The configuration in those files is the same as documented and is the default configuration for Lazy Vim's extras plugins (reference to the :LazyExtras command).
+
+Note: I had the following error in Astro files:
+
+Error in FileType Autocommands for "*"..function <SNR>1_LoadFTPlugin[20]..script /usr/local/share/nvim/runtime/ftplugin/astro.vim[164]..function <SNR>31_CollectPathsFromConfig:
+line 11:
+E474: Trailing comma: } }, }
+
+I solved it by deleting the astro.vim file in the path:
+
+/usr/local/share/nvim/runtime/ftplugin/
