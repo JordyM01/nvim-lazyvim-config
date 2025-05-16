@@ -1,3 +1,5 @@
+if true then return {} end -- Uncommenting this line enables the configuration
+
 return {
   "saghen/blink.cmp",
   opts = {

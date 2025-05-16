@@ -1,5 +1,16 @@
--- lua/plugins/theme.lua
+-- lua/plugins/colorscheme.lua
+
+-- if true then return {} end -- Uncommenting this line enables the configuration
+
 return {
+
+  -- Selected colorscheme
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight", -- colorscheme
+    },
+  },
   -- 1. Catppuccin (ya lo teníamos)
   {
     "catppuccin/nvim",
