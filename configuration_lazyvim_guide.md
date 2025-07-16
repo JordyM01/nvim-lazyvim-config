@@ -203,3 +203,93 @@ rust-analyzer es el servidor de lenguaje oficial para Rust y es esencial para fu
     rustup update nightly 
   ```
 
+Claro, aquí tienes el texto convertido a documentación en formato Markdown.
+
+# 🐍 Guía: Entornos Virtuales de Python en LazyVim con venv-selector.nvim
+
+Esta guía detalla el proceso para configurar y utilizar **`venv-selector.nvim`** en una instalación de Neovim con **LazyVim**, específicamente en un entorno de Arch Linux. Este plugin ofrece una manera rápida y eficiente de seleccionar el entorno virtual de Python (`.venv`, `venv`, etc.) para un proyecto.
+
+-----
+
+## 1\. Problema Inicial 🤔
+
+Al utilizar la configuración por defecto de LazyVim para Python, el comando `:PythonSetInterpreter` puede no estar disponible o no funcionar como se espera. Una solución más robusta y directa es utilizar un plugin dedicado como **`venv-selector.nvim`**.
+
+-----
+
+## 2\. Instalación y Configuración del Plugin ⚙️
+
+Para habilitar **`venv-selector.nvim`** en LazyVim, es necesario crear un archivo de configuración específico para él en la carpeta de plugins.
+
+#### Paso 1: Crear el Archivo de Configuración
+
+Crea un nuevo archivo Lua en el directorio de plugins de tu configuración de Neovim:
+
+```bash
+touch ~/.config/nvim/lua/plugins/python-venv.lua
+```
+
+#### Paso 2: Añadir el Código de Configuración
+
+Pega el siguiente código en el archivo `python-venv.lua` que acabas de crear. Esta configuración define el plugin, sus dependencias, cuándo debe cargarse y un atajo de teclado para activarlo.
+
+```lua
+-- ~/.config/nvim/lua/plugins/python-venv.lua
+return {
+  -- El nombre del plugin en GitHub
+  "linux-cultist/venv-selector.nvim",
+
+  -- Dependencias necesarias para el funcionamiento del plugin
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    "nvim-telescope/telescope.nvim", -- Requerido para la interfaz de selección
+    "mfussenegger/nvim-dap-python",   -- Opcional, para integración con el depurador
+  },
+
+  -- Carga perezosa: El plugin solo se activará al abrir archivos de Python
+  ft = { "python" },
+
+  -- Configuración principal del plugin
+  config = function()
+    -- Se utiliza la configuración por defecto, que es suficiente para la mayoría de los casos.
+    require("venv-selector").setup()
+  end,
+
+  -- Atajos de teclado para una mayor comodidad
+  keys = {
+    -- Define el atajo <leader>pv para ejecutar el comando VenvSelect
+    -- El 'desc' añade una descripción útil que puede ser vista con plugins como which-key
+    { "<leader>pv", "<cmd>VenvSelect<cr>", desc = "Python: Seleccionar Entorno Virtual" },
+  },
+}
+```
+
+-----
+
+## 3\. Solución de Errores Comunes 🛠️
+
+#### Error: `Cannot find any fd binary on your system`
+
+Al intentar usar el atajo de teclado (`<leader>pv`) por primera vez, es muy probable que encuentres este error.
+
+> **Causa**: El plugin utiliza **Telescope** para mostrar la lista de entornos virtuales. A su vez, Telescope depende de una herramienta de línea de comandos llamada **`fd`** para buscar archivos y directorios de manera eficiente. El error indica que `fd` no está instalado en tu sistema.
+
+> **Solución en Arch Linux**: La instalación de `fd` es muy sencilla. Abre una terminal y ejecuta el siguiente comando:
+
+```bash
+sudo pacman -S fd
+```
+
+Una vez instalado `fd`, reinicia Neovim. El error desaparecerá.
+
+-----
+
+## 4\. Flujo de Trabajo Final ✅
+
+Con la configuración completada y las dependencias instaladas, el proceso para cambiar de entorno virtual es el siguiente:
+
+1. Abre cualquier archivo `.py` dentro de tu proyecto en Neovim.
+2. Presiona la combinación de teclas **`<leader>pv`** (tu tecla líder, seguida de `p` y `v`).
+3. Se abrirá una ventana de **Telescope** mostrando todos los entornos virtuales detectados en el directorio del proyecto.
+4. Navega por la lista y presiona `Enter` para seleccionar el entorno deseado.
+5. El plugin reconfigurará automáticamente el LSP (`pyright`) y otras herramientas para utilizar el intérprete de Python del entorno que has seleccionado.
