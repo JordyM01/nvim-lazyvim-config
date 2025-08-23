@@ -361,3 +361,86 @@ cambiar de entorno virtual es el siguiente:
 4. Navega por la lista y presiona `Enter` para seleccionar el entorno deseado.
 5. El plugin reconfigurará automáticamente el LSP (`pyright`) y otras
   herramientas para utilizar el intérprete de Python del entorno que has seleccionado.
+
+## 6 Configuración para .NET (C#) en Arch Linux
+
+Configurar un entorno de desarrollo para .NET en Neovim con Arch Linux puede
+presentar desafíos únicos. Esta guía documenta la solución definitiva y robusta.
+
+### 6.1 Resumen de la Solución Final
+
+La estrategia más efectiva es instalar una versión autocontenida de OmniSharp desde
+el Arch User Repository (AUR). Esto resuelve todos los conflictos de versiones y
+dependencias que surgen con otros métodos.
+
+### 6.2 Prerrequisitos del Sistema (Arch Linux)
+
+Antes de configurar Neovim, asegúrate de que tu sistema tiene las siguientes
+herramientas instaladas.
+
+#### Paso 1: Instalar el SDK de .NET
+
+El SDK de .NET es fundamental. Se instala directamente desde los repositorios oficiales:
+
+```bash
+sudo pacman -S dotnet-sdk
+```
+
+Verifica la instalación con `dotnet --version`.
+
+#### Paso 2: Instalar OmniSharp Roslyn desde el AUR (La Clave del Éxito)
+
+Esta es la parte más importante. Instalamos `omnisharp-roslyn` desde el AUR
+usando un gestor como `yay`:
+
+```bash
+yay -S omnisharp-roslyn
+```
+
+Este paquete es autocontenido y está diseñado para funcionar con el SDK de .NET
+moderno, eliminando la necesidad de dependencias problemáticas.
+
+### 6.3 Configuración de Neovim
+
+Con los prerrequisitos del sistema listos, la configuración en Neovim es sencilla.
+
+#### Paso 1: Habilitar el Extra de C# en LazyVim
+
+Para habilitar el extra de C# en LazyVim:
+
+1. Abre Neovim y ejecuta el comando `:LazyExtras`
+2. En la lista que aparece, busca el extra de OmniSharp/C#
+3. Selecciona el extra para habilitarlo
+
+Este método es más directo que editar manualmente el archivo de configuración y LazyVim
+se encarga automáticamente de la configuración necesaria.
+
+#### Paso 2: Instalar Herramientas con Mason
+
+Mason se encarga de registrar el LSP y el depurador con Neovim.
+
+1. Abre Neovim y ejecuta `:Lazy sync`.
+2. Ejecuta `:Mason` y asegúrate de que los siguientes paquetes estén
+instalados (usa `i` para instalarlos):
+   - `omnisharp`
+   - `netcoredbg` (para la depuración)
+
+#### Paso 3: Instalar el Parser de Tree-sitter
+
+Para un resaltado de sintaxis superior, instala el parser de Tree-sitter para C#:
+
+```vim
+:TSInstall c_sharp
+```
+
+### 6.4 Por Qué Este Método Funciona
+
+El ecosistema de .NET en Linux puede ser complejo. Otros métodos, como usar el
+`omnisharp-mono` que ofrece Mason, a menudo fallan en Arch Linux. Esto se debe
+a que `omnisharp-mono` depende de los paquetes `mono` y `msbuild` de los
+repositorios oficiales, los cuales suelen ser incompatibles o tener una versión
+desactualizada respecto al SDK de .NET moderno.
+
+La instalación de `omnisharp-roslyn` desde el AUR evita este problema por completo,
+ya que proporciona un ejecutable autocontenido que funciona directamente con tu
+`dotnet-sdk` sin conflictos.
