@@ -444,3 +444,47 @@ desactualizada respecto al SDK de .NET moderno.
 La instalación de `omnisharp-roslyn` desde el AUR evita este problema por completo,
 ya que proporciona un ejecutable autocontenido que funciona directamente con tu
 `dotnet-sdk` sin conflictos.
+
+## 7. Vista Previa en Vivo para Web (Live Server)
+
+Replica la funcionalidad de "Live Server" de VS Code para previsualizar HTML,
+CSS y JavaScript.
+
+### 7.1 Prerrequisitos (Arch Linux)
+
+Este método depende de `live-server`, una herramienta estándar de Node.js.
+
+```bash
+# 1. Instalar Node.js y npm
+sudo pacman -S nodejs npm
+
+# 2. Instalar live-server de forma global
+sudo npm install -g live-server
+```
+
+### 7.2 Configuración del Plugin
+
+Crea el archivo `~/.config/nvim/lua/plugins/live-server.lua` para que LazyVim
+instale el plugin de integración.
+
+```lua
+-- ~/.config/nvim/lua/plugins/live-server.lua
+return {
+  {
+    "barrett-ruth/live-server.nvim",
+    cmd = "LiveServer",
+    opts = {
+      -- port = 8080, -- Opcional: define un puerto específico
+    },
+  },
+}
+```
+
+Reinicia Neovim o ejecuta `:Lazy sync` para instalar el plugin.
+
+### 7.3 Uso
+
+1. Abre un archivo HTML.
+2. Ejecuta `:LiveServer` para iniciar la vista previa en tu navegador.
+3. La página se recargará automáticamente cada vez que guardes (`:w`).
+4. Para detenerlo, ejecuta `:LiveServerStop`.
