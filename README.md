@@ -24,6 +24,20 @@
     - [5.3 Solución de Errores Comunes](#53-solución-de-errores-comunes)
       - [Error: `Cannot find any fd binary on your system`](#error-cannot-find-any-fd-binary-on-your-system)
     - [5.4 Flujo de Trabajo Final](#54-flujo-de-trabajo-final)
+  - [6 Configuración para .NET (C#) en Arch Linux](#6-configuración-para-net-c-en-arch-linux)
+    - [6.1 Resumen de la Solución Final](#61-resumen-de-la-solución-final)
+    - [6.2 Prerrequisitos del Sistema (Arch Linux)](#62-prerrequisitos-del-sistema-arch-linux)
+      - [Paso 1: Instalar el SDK de .NET](#paso-1-instalar-el-sdk-de-net)
+      - [Paso 2: Instalar OmniSharp Roslyn desde el AUR (La Clave del Éxito)](#paso-2-instalar-omnisharp-roslyn-desde-el-aur-la-clave-del-éxito)
+    - [6.3 Configuración de Neovim](#63-configuración-de-neovim)
+      - [Paso 1: Habilitar el Extra de C# en LazyVim](#paso-1-habilitar-el-extra-de-c-en-lazyvim)
+      - [Paso 2: Instalar Herramientas con Mason](#paso-2-instalar-herramientas-con-mason)
+      - [Paso 3: Instalar el Parser de Tree-sitter](#paso-3-instalar-el-parser-de-tree-sitter)
+    - [6.4 Por Qué Este Método Funciona](#64-por-qué-este-método-funciona)
+  - [7. Vista Previa en Vivo para Web (Live Server)](#7-vista-previa-en-vivo-para-web-live-server)
+    - [7.1 Prerrequisitos (Arch Linux)](#71-prerrequisitos-arch-linux)
+    - [7.2 Configuración del Plugin](#72-configuración-del-plugin)
+    - [7.3 Uso](#73-uso)
 <!--toc:end-->
 
 Este documento detalla la instalación y configuración de LazyVim, incluyendo
