@@ -1,6 +1,7 @@
 # Guía de Configuración de LazyVim
 
 <!--toc:start-->
+
 - [Guía de Configuración de LazyVim](#guía-de-configuración-de-lazyvim)
   - [1 Instalación y Configuración Inicial de LazyVim](#1-instalación-y-configuración-inicial-de-lazyvim)
     - [1.1 Añadir Configuraciones Personalizadas](#11-añadir-configuraciones-personalizadas)
@@ -38,7 +39,14 @@
     - [7.1 Prerrequisitos (Arch Linux)](#71-prerrequisitos-arch-linux)
     - [7.2 Configuración del Plugin](#72-configuración-del-plugin)
     - [7.3 Uso](#73-uso)
-<!--toc:end-->
+  - [8. Configuración para React (JavaScript/TypeScript)](#8-configuración-para-react-javascripttypescript)
+    - [8.1 Prerrequisitos (Arch Linux)](#81-prerrequisitos-arch-linux)
+    - [8.2 Configuración en Neovim](#82-configuración-en-neovim)
+    - [8.2.1 Habilitar Extras de LazyVim](#821-habilitar-extras-de-lazyvim)
+    - [8.2.2 Instalar Herramientas con Mason](#822-instalar-herramientas-con-mason)
+    - [8.2.3 Instalar Parsers de Tree-sitter](#823-instalar-parsers-de-tree-sitter)
+    - [8.3 Configuración del Proyecto (¡Importante!)](#83-configuración-del-proyecto-importante)
+    <!--toc:end-->
 
 Este documento detalla la instalación y configuración de LazyVim, incluyendo
 la personalización de plugins y la configuración específica para el entorno
@@ -106,7 +114,7 @@ return {
 ```
 
 > **Nota**: Reemplaza "folke/tokyonight.nvim" y la configuración según el tema
-que desees usar.
+> que desees usar.
 
 ### 2.2 Deshabilitar Noice UI
 
@@ -149,7 +157,7 @@ return {
 ```
 
 > **Nota**: El nombre exacto del archivo y la estructura pueden variar ligeramente
-dependiendo de la versión de LazyVim y cómo gestiona snack-explorer.
+> dependiendo de la versión de LazyVim y cómo gestiona snack-explorer.
 
 ### 2.4 Configuración para Go (Golang)
 
@@ -187,7 +195,7 @@ sudo rm /usr/local/share/nvim/runtime/ftplugin/astro.vim
 ```
 
 > **Precaución**: Eliminar archivos del sistema de Neovim puede tener efectos
-secundarios. Considera moverlo o renombrarlo primero.
+> secundarios. Considera moverlo o renombrarlo primero.
 
 ## 4 Configuración Específica para Rust
 
@@ -196,12 +204,12 @@ Para un desarrollo óptimo con Rust en LazyVim, sigue estas recomendaciones:
 ### 4.1 Recomendaciones Generales para Rust en LazyVim
 
 - **Utiliza los plugins de LazyExtras**: Asegúrate de que los extras para
-Rust estén activados mediante `:LazyExtras`. Esto instalará rust-tools.nvim
-o herramientas similares y rust-analyzer.
+  Rust estén activados mediante `:LazyExtras`. Esto instalará rust-tools.nvim
+  o herramientas similares y rust-analyzer.
 
 - **Instalación Limpia**: Considera una instalación limpia de Neovim o asegúrate
-de que no haya configuraciones conflictivas previas si encuentras problemas
-con la configuración de Rust.
+  de que no haya configuraciones conflictivas previas si encuentras problemas
+  con la configuración de Rust.
 
 ### 4.2 Prerrequisitos del Entorno Rust
 
@@ -260,7 +268,7 @@ funcionalidades como autocompletado, diagnóstico y navegación de código.
   - Mantén tu toolchain nocturna y sus componentes actualizados.
 
   ```bash
-    rustup update nightly 
+    rustup update nightly
   ```
 
 Claro, aquí tienes el texto convertido a documentación en formato Markdown.
@@ -272,7 +280,7 @@ en una instalación de Neovim con **LazyVim**, específicamente en un entorno de
 Arch Linux. Este plugin ofrece una manera rápida y eficiente de seleccionar
 el entorno virtual de Python (`.venv`, `venv`, etc.) para un proyecto.
 
------
+---
 
 ### 5.1 Problema Inicial
 
@@ -280,7 +288,7 @@ Al utilizar la configuración por defecto de LazyVim para Python, el comando `:P
 puede no estar disponible o no funcionar como se espera. Una solución más robusta
 y directa es utilizar un plugin dedicado como **`venv-selector.nvim`**.
 
------
+---
 
 ### 5.2 Instalación y Configuración del Plugin
 
@@ -331,13 +339,13 @@ return {
     -- como which-key
     {
       "<leader>pv", "<cmd>VenvSelect<cr>",
-      desc = "Python: Seleccionar Entorno Virtual" 
+      desc = "Python: Seleccionar Entorno Virtual"
     },
   },
 }
 ```
 
------
+---
 
 ### 5.3 Solución de Errores Comunes
 
@@ -347,12 +355,12 @@ Al intentar usar el atajo de teclado (`<leader>pv`) por primera vez, es muy
 probable que encuentres este error.
 
 > **Causa**: El plugin utiliza **Telescope** para mostrar la lista de entornos
-virtuales. A su vez, Telescope depende de una herramienta de línea de comandos
-llamada **`fd`** para buscar archivos y directorios de manera eficiente.
-El error indica que `fd` no está instalado en tu sistema.
+> virtuales. A su vez, Telescope depende de una herramienta de línea de comandos
+> llamada **`fd`** para buscar archivos y directorios de manera eficiente.
+> El error indica que `fd` no está instalado en tu sistema.
 >
 > **Solución en Arch Linux**: La instalación de `fd` es muy sencilla.
-Abre una terminal y ejecuta el siguiente comando:
+> Abre una terminal y ejecuta el siguiente comando:
 
 ```bash
 sudo pacman -S fd
@@ -360,7 +368,7 @@ sudo pacman -S fd
 
 Una vez instalado `fd`, reinicia Neovim. El error desaparecerá.
 
------
+---
 
 ### 5.4 Flujo de Trabajo Final
 
@@ -369,12 +377,12 @@ cambiar de entorno virtual es el siguiente:
 
 1. Abre cualquier archivo `.py` dentro de tu proyecto en Neovim.
 2. Presiona la combinación de teclas **`<leader>pv`**
-  (tu tecla líder, seguida de `p` y `v`).
+   (tu tecla líder, seguida de `p` y `v`).
 3. Se abrirá una ventana de **Telescope** mostrando todos los entornos
-  virtuales detectados en el directorio del proyecto.
+   virtuales detectados en el directorio del proyecto.
 4. Navega por la lista y presiona `Enter` para seleccionar el entorno deseado.
 5. El plugin reconfigurará automáticamente el LSP (`pyright`) y otras
-  herramientas para utilizar el intérprete de Python del entorno que has seleccionado.
+   herramientas para utilizar el intérprete de Python del entorno que has seleccionado.
 
 ## 6 Configuración para .NET (C#) en Arch Linux
 
@@ -435,7 +443,7 @@ Mason se encarga de registrar el LSP y el depurador con Neovim.
 
 1. Abre Neovim y ejecuta `:Lazy sync`.
 2. Ejecuta `:Mason` y asegúrate de que los siguientes paquetes estén
-instalados (usa `i` para instalarlos):
+   instalados (usa `i` para instalarlos):
    - `omnisharp`
    - `netcoredbg` (para la depuración)
 
@@ -502,3 +510,60 @@ Reinicia Neovim o ejecuta `:Lazy sync` para instalar el plugin.
 2. Ejecuta `:LiveServer` para iniciar la vista previa en tu navegador.
 3. La página se recargará automáticamente cada vez que guardes (`:w`).
 4. Para detenerlo, ejecuta `:LiveServerStop`.
+
+## 8. Configuración para React (JavaScript/TypeScript)
+
+Guía para configurar un entorno de desarrollo de React de primera clase, cubriendo
+tanto JSX (JavaScript) como TSX (TypeScript).
+
+### 8.1 Prerrequisitos (Arch Linux)
+
+El ecosistema de React se basa en Node.js, que es necesario para ejecutar las
+herramientas de desarrollo y el LSP.
+
+```bash
+# Instalar Node.js y npm si aún no los tienes
+sudo pacman -S nodejs npm
+```
+
+### 8.2 Configuración en Neovim
+
+LazyVim simplifica enormemente la configuración a través de sus "extras".
+
+#### 8.2.1 Habilitar Extras de LazyVim
+
+Ejecuta `:LazyExtras` y asegúrate de que los siguientes extras estén habilitados:
+
+- **`lang.typescript`**: Proporciona la configuración principal para `tsserver`
+  (el LSP), `eslint` (linter) y `prettier` (formateador). Cubre JavaScript,
+  TypeScript, JSX y TSX.
+- **`lang.json`**: Útil para manejar archivos como `package.json`.
+
+#### 8.2.2 Instalar Herramientas con Mason
+
+Después de habilitar los extras y reiniciar Neovim, ejecuta `:Mason` e instala
+las herramientas clave:
+
+- **`typescript-language-server`**: El LSP principal.
+- **`eslint_d`**: Un linter rápido (versión demonizada de ESLint).
+- **`prettier`**: El formateador estándar de la industria.
+
+#### 8.2.3 Instalar Parsers de Tree-sitter
+
+Para un resaltado de sintaxis perfecto en componentes de React, instala los
+parsers necesarios. El parser `tsx` es crucial.
+
+```vim
+:TSInstall javascript typescript tsx json
+```
+
+### 8.3 Configuración del Proyecto (¡Importante!)
+
+Para que el formateo (`prettier`) y el linting (`eslint`) funcionen, tu proyecto
+de React necesita sus propios archivos de configuración (`.prettierrc`,
+`.eslintrc.js`).
+
+Estos archivos generalmente se crean de forma automática cuando inicias un
+proyecto con herramientas modernas como **Vite** (`npm create vite@latest`) o
+`create-react-app`. Neovim leerá estas configuraciones locales para aplicar las
+reglas correctas a tu código.
