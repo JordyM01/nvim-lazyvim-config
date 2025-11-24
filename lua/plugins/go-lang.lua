@@ -55,7 +55,7 @@ return {
         gopls = function(_, opts)
           -- workaround for gopls not supporting semanticTokensProvider
           -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-          require("Snacks.util.lsp.on").attach(function(client, _)
+          Snacks.util.lsp.on({ name = "gopls" }, function(_, client)
             if not client.server_capabilities.semanticTokensProvider then
               local semantic = client.config.capabilities.textDocument.semanticTokens
               client.server_capabilities.semanticTokensProvider = {
@@ -67,7 +67,7 @@ return {
                 range = true,
               }
             end
-          end, "gopls")
+          end)
           -- end workaround
         end,
       },
@@ -96,6 +96,22 @@ return {
         nls.builtins.formatting.gofumpt,
       })
     end,
+  },
+  -- Add linting
+  {
+    "mfussenegger/nvim-lint",
+    optional = true,
+    dependencies = {
+      {
+        "mason-org/mason.nvim",
+        opts = { ensure_installed = { "golangci-lint" } },
+      },
+    },
+    opts = {
+      linters_by_ft = {
+        go = { "golangcilint" },
+      },
+    },
   },
   {
     "stevearc/conform.nvim",
@@ -139,7 +155,7 @@ return {
 
   -- Filetype icons
   {
-    "echasnovski/mini.icons",
+    "nvim-mini/mini.icons",
     opts = {
       file = {
         [".go-version"] = { glyph = "", hl = "MiniIconsBlue" },
