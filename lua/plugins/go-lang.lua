@@ -1,3 +1,5 @@
+-- Archivo: ~/.config/nvim/lua/plugins/go-lang.lua
+
 return {
   recommended = function()
     return LazyVim.extras.wants({
@@ -51,29 +53,9 @@ return {
           },
         },
       },
-      setup = {
-        gopls = function(_, opts)
-          -- workaround for gopls not supporting semanticTokensProvider
-          -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-          Snacks.util.lsp.on({ name = "gopls" }, function(_, client)
-            if not client.server_capabilities.semanticTokensProvider then
-              local semantic = client.config.capabilities.textDocument.semanticTokens
-              client.server_capabilities.semanticTokensProvider = {
-                full = true,
-                legend = {
-                  tokenTypes = semantic.tokenTypes,
-                  tokenModifiers = semantic.tokenModifiers,
-                },
-                range = true,
-              }
-            end
-          end)
-          -- end workaround
-        end,
-      },
     },
   },
-  -- Ensure Go tools are installed
+  -- 🛠️ Cambio: mason-org/mason.nvim
   {
     "mason-org/mason.nvim",
     opts = { ensure_installed = { "goimports", "gofumpt" } },
@@ -83,7 +65,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "mason-org/mason.nvim",
+        "mason-org/mason.nvim", -- Actualizado aquí también
         opts = { ensure_installed = { "gomodifytags", "impl" } },
       },
     },
@@ -97,13 +79,12 @@ return {
       })
     end,
   },
-  -- Add linting
   {
     "mfussenegger/nvim-lint",
     optional = true,
     dependencies = {
       {
-        "mason-org/mason.nvim",
+        "mason-org/mason.nvim", -- Actualizado aquí también
         opts = { ensure_installed = { "golangci-lint" } },
       },
     },
@@ -127,7 +108,7 @@ return {
     optional = true,
     dependencies = {
       {
-        "mason-org/mason.nvim",
+        "mason-org/mason.nvim", -- Actualizado aquí también
         opts = { ensure_installed = { "delve" } },
       },
       {
@@ -145,15 +126,13 @@ return {
     opts = {
       adapters = {
         ["neotest-golang"] = {
-          -- Here we can set options for neotest-golang, e.g.
-          -- go_test_args = { "-v", "-race", "-count=1", "-timeout=60s" },
-          dap_go_enabled = true, -- requires leoluz/nvim-dap-go
+          dap_go_enabled = true,
         },
       },
     },
   },
 
-  -- Filetype icons
+  -- 🛠️ Cambio: nvim-mini/mini.icons
   {
     "nvim-mini/mini.icons",
     opts = {
